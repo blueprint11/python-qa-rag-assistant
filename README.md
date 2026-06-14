@@ -134,40 +134,51 @@ The slide deck is in [docs/Python_QA_Assistant_Slide_Deck.pptx](docs/Python_QA_A
 - GitHub repository: code, README, `.env.example`, tests, and processed Kaggle 5k dataset.
 - Test results: [docs/test_results.md](docs/test_results.md).
 - Slide deck: [docs/Python_QA_Assistant_Slide_Deck.pptx](docs/Python_QA_Assistant_Slide_Deck.pptx).
-- Public app URL: add it below after deployment.
+- Public app URL: https://python-qa-rag-assistant.onrender.com
 
-## Deployment
+## Live App
 
-### Render
-
-1. Push this repository to GitHub.
-2. Create a Render Web Service from the GitHub repo.
-3. Use this build command:
-
-```bash
-pip install -r requirements.txt
-```
-
-4. Use this start command:
-
-```bash
-uvicorn app.main:app --host 0.0.0.0 --port $PORT
-```
-
-5. Configure environment variables from `.env.example`.
-
-Render can also read `render.yaml`, which already contains the same build command, start command, and environment variables.
-
-### Hugging Face Spaces
-
-Use Docker Space. The included `Dockerfile` starts FastAPI on port `7860` and loads:
+Live URL:
 
 ```text
-DATASET_PATH=data/processed_python_qa_5k.csv
+https://python-qa-rag-assistant.onrender.com
 ```
 
-Add the deployed URL here:
+Swagger UI:
 
 ```text
-Live URL: https://python-qa-rag-assistant.onrender.com
+https://python-qa-rag-assistant.onrender.com/docs
 ```
+
+Health check:
+
+```text
+https://python-qa-rag-assistant.onrender.com/health
+```
+
+Ask a question with `POST /ask`:
+
+```bash
+curl -X POST "https://python-qa-rag-assistant.onrender.com/ask" \
+  -H "Content-Type: application/json" \
+  -d '{"question":"What is a private member of a class in Python?","top_k":4}'
+```
+
+Example request body in Swagger:
+
+```json
+{
+  "question": "What is a private member of a class in Python?",
+  "top_k": 4
+}
+```
+
+## Deployment Notes
+
+The app is deployed on Render using the included `render.yaml`. It loads the processed Kaggle subset from:
+
+```text
+data/processed_python_qa_5k.csv
+```
+
+Free Render instances may spin down after inactivity, so the first request can be slower.

@@ -75,9 +75,9 @@ KeywordRetriever over processed Kaggle documents
 - Serving: run multiple Uvicorn workers behind a load balancer.
 - Cost: use a cheap retriever first, call an LLM only for final synthesis when needed.
 
-## 10. Deployment Plan
-- Push the repo to GitHub with the processed 5k CSV included.
-- Deploy on Hugging Face Spaces or Render free tier.
-- Start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`.
-- Environment: `DATASET_PATH=data/processed_python_qa_5k.csv`.
-- Add the live deployed URL to `README.md` after deployment.
+## 10. Deployment
+- Public app is deployed on Render.
+- Live URL: `https://python-qa-rag-assistant.onrender.com`
+- Swagger UI: `https://python-qa-rag-assistant.onrender.com/docs`
+- Health check confirms `document_count = 5000`.
+- Free tier note: first request can be slower because Render may spin down after inactivity.

@@ -169,5 +169,5 @@ DATASET_PATH=data/processed_python_qa_5k.csv
 Add the deployed URL here:
 
 ```text
-Live URL: pending deployment
+Live URL: https://python-qa-rag-assistant.onrender.com
 ```

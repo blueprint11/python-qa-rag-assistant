@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: python-qa-assistant
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATASET_PATH
+        value: data/processed_python_qa_5k.csv
+      - key: MAX_DOCUMENTS
+        value: "5000"
+      - key: TOP_K
+        value: "4"
+      - key: MIN_RETRIEVAL_SCORE
+        value: "0.25"
